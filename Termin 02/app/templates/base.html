@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="sr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>Moja Flask Aplikacija - {% block title %}{% endblock %}</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <a href="{{ url_for('dashboard.index') }}">Početna</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('auth.logout') }}">Odjava</a>
+        {% else %}
+        <a href="{{ url_for('auth.login') }}">Prijava</a>
+        <a href="{{ url_for('auth.register') }}">Registracija</a>
+        {% endif %}
+      </nav>
+    </header>
+
+    <div class="container">
+      <main class="card">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">{{ message }}</div>
+        {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+      </main>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 My Flask App - Nemanja Petrović</p>
+    </footer>
+  </body>
+</html>

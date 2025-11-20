@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block title %}Početna strana{% endblock %} {% block
+content %}
+<h1>
+  Zdravo, {% if current_user.is_authenticated %}{{ current_user.username }}{%
+  else %}Goste{% endif %}!
+</h1>
+
+<p>Ovo je vaša početna stranica.</p>
+
+{% if current_user.is_authenticated %}
+<p>
+  Uspešno ste se prijavili koristeći email adresu:
+  <strong>{{ current_user.email }}</strong>.
+</p>
+<p>Sada imate pristup zaštićenim delovima sajta.</p>
+
+{% else %}
+<p>
+  Niste prijavljeni. Molimo Vas da se
+  <a href="{{ url_for('auth.login') }}">prijavite</a>.
+</p>
+{% endif %} {% endblock %}
