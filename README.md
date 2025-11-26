@@ -1,7 +1,8 @@
-# Distribuirani računarski sistemi  
+# Distribuirani računarski sistemi
+
 Materijal za vežbe – 2025/2026
 
-Ovaj projekat predstavlja osnovu za rad u okviru vežbi iz predmeta **Distribuirani računarski sistemi**.  
+Ovaj projekat predstavlja osnovu za rad u okviru vežbi iz predmeta **Distribuirani računarski sistemi**.
 
 ---
 
@@ -9,7 +10,7 @@ Ovaj projekat predstavlja osnovu za rad u okviru vežbi iz predmeta **Distribuir
 
 ### Korak 1: Rekreirati virtuelno okruženje
 
-Na osnovu *Pipfile* i *Pipfile.lock*:
+Na osnovu _Pipfile_ i _Pipfile.lock_:
 
 ```bash
 pipenv install
@@ -92,12 +93,14 @@ Sistem treba da prikaže:
     poruku o pogrešnoj lozinki,
 
     poruku o nevalidnim podacima.
+
 ## 🧪 Termin 03 – Uputstvo za pokretanje projekta
 
 ### Python Flask Web API
+
 ### Korak 1: Rekreirati virtuelno okruženje
 
-Na osnovu *Pipfile* i *Pipfile.lock*:
+Na osnovu _Pipfile_ i _Pipfile.lock_:
 
 ```bash
 pipenv install
@@ -125,10 +128,12 @@ pipenv shell
 
 python run.py
 ```
-### Reacr
+
+### React
+
 ### Korak 1: Instalacija zavisnosti
 
-Na osnovu *package.json* i *package-lock.json*:
+Na osnovu _package.json_ i _package-lock.json_:
 
 ```bash
 npm install
