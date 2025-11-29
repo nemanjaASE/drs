@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { sendContactMessage } from "../services/contactService";
+import { Button } from "../../../components/Button";
+import { FiSend } from "react-icons/fi";
 
 export default function ContactPage() {
   const [name, setName] = useState("");
@@ -86,12 +88,15 @@ export default function ContactPage() {
           ></textarea>
         </div>
 
-        <button
-          type="submit"
-          className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-md transition-colors"
+        <Button 
+          type="submit" 
+          variant="primary" 
+          size="md"
+          leftIcon={<FiSend />}
+          loading={status === "Sending..."}
         >
           Send Message
-        </button>
+        </Button>
       </form>
 
       {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
