@@ -5,11 +5,15 @@ import { getUsers } from "../services/userService";
 import type { User } from "../types";
 import { Button } from "../../../components/Button";
 import { FiChevronDown } from "react-icons/fi";
+import { useUserCreatedToast } from "../hooks/useUserCreatedToast";
 
 export default function UsersPage() {
   const [users, setUsers] = useState<User[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
+
+  // Enable WebSocket toast notifications
+  useUserCreatedToast();
 
   useEffect(() => {
     fetchUsers();
@@ -49,7 +53,8 @@ export default function UsersPage() {
         >
           {showForm ? "Hide Form" : "Add User"}
         </Button>
-    </div>
+      </div>
+      
       {showForm && <UserForm onUserAdded={handleUserAdded} />}
 
       {loading ? <p>Loading users...</p> : <UserList users={users} />}
