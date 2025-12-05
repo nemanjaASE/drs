@@ -5,7 +5,11 @@ import type { User } from "../types";
 
 const SOCKET_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:5000";
 
-export const useUserCreatedToast = () => {
+interface UseUserCreatedToastProps {
+  onUserCreated?: () => void;
+}
+
+export const useUserCreatedToast = ({ onUserCreated }: UseUserCreatedToastProps = {}) => {
   useEffect(() => {
     // Establish WebSocket connection
     const socket: Socket = io(SOCKET_URL, {
@@ -33,6 +37,11 @@ export const useUserCreatedToast = () => {
           draggable: true,
         }
       );
+
+      // Refresh user list if callback is provided
+      if (onUserCreated) {
+        onUserCreated();
+      }
     });
 
     // Listen for disconnection
@@ -50,5 +59,5 @@ export const useUserCreatedToast = () => {
       socket.disconnect();
       console.log("WebSocket disconnected (cleanup)");
     };
-  }, []);
+  }, [onUserCreated]);
 };

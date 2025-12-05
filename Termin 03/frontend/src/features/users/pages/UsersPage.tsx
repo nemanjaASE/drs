@@ -12,9 +12,6 @@ export default function UsersPage() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
-  // Enable WebSocket toast notifications
-  useUserCreatedToast();
-
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -30,6 +27,9 @@ export default function UsersPage() {
       setLoading(false);
     }
   };
+
+  // Enable WebSocket toast notifications AND auto-refresh
+  useUserCreatedToast({ onUserCreated: fetchUsers });
 
   const handleUserAdded = async () => {
     await fetchUsers();
