@@ -9,7 +9,9 @@ interface ContactMessage {
 
 export async function sendContactMessage(data: ContactMessage) {
   try {
+    console.log("POSTing to", ENDPOINTS.contacts, "payload:", data);
     const response = await api.post(ENDPOINTS.contacts, data);
+    console.log("sendContactMessage response:", response);
     return response.data;
   } catch (err: any) {
     console.error("Failed to send message:", err);
