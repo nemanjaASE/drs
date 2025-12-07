@@ -1,6 +1,6 @@
 from bson import ObjectId
 from .schemas import UserCreate, UserOut, UserUpdate
-from app.extensions import mongo
+from app.extensions import mongo, socketio
 import base64
 from typing import BinaryIO, Optional
 from pymongo import ReturnDocument
@@ -25,7 +25,12 @@ class UserService:
         result = mongo.db.users.insert_one(user_dict)
         user_dict['id'] = str(result.inserted_id)
 
-        return UserOut(**user_dict)
+        user_out = UserOut(**user_dict)
+        
+        # Emit WebSocket event for new user creation
+        socketio.emit('user_created', user_out.model_dump())
+        
+        return user_out
     
     @staticmethod
     def get_user(user_id: str) -> Optional[UserOut]:
