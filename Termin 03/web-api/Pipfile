@@ -9,6 +9,8 @@ python-dotenv = "*"
 flask-pymongo = "*"
 pydantic = "*"
 flask-cors = "*"
+mailtrap = "*"
+email-validator = "*"
 
 [dev-packages]
 

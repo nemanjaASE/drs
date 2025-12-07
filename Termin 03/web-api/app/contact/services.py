@@ -1,9 +1,7 @@
 import os
-from dotenv import load_dotenv
 from .schemas import ContactMessage
 import mailtrap as mt
-
-load_dotenv()  
+from flask import current_app
 
 class ContactService:
     @staticmethod
@@ -18,19 +16,7 @@ class ContactService:
             Tuple (False, "error_message") ako greška
         """
         try:
-            token = os.getenv('MAILTRAP_TOKEN')
-            inbox_id = os.getenv('MAILTRAP_INBOX_ID')
-
             
-
-
-            # Debug - proveri da li su kredencijali učitani
-            if not token:
-                return False, "MAILTRAP_TOKEN nije postavljen u .env fajlu"
-            if not inbox_id:
-                return False, "MAILTRAP_INBOX_ID nije postavljen u .env fajlu"
-            
-            inbox_id = int(inbox_id)
 
             mail = mt.Mail(
                 sender=mt.Address(
@@ -43,7 +29,7 @@ class ContactService:
                 category="Contact Form",
             )
             
-            client = mt.MailtrapClient(token=token, sandbox=True, inbox_id=inbox_id)
+            client = mt.MailtrapClient(token=current_app.config["TOKEN"], sandbox=True, inbox_id=int(current_app.config["INBOX_ID"]))
             response = client.send(mail)
             
             print(f"Email poslat: {response}")
